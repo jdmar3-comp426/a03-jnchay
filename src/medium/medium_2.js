@@ -111,7 +111,6 @@ hybrids.forEach(function(hybrid) {
 })
 
 
-
 var dict = countArray(makes);
 var desc_makes = [];
 for (var make in dict) {
@@ -120,7 +119,6 @@ for (var make in dict) {
 desc_makes.sort(function(a, b) {
     return b[1] - a[1];
 });
-
 
 
 var _makerHybrids = [];
