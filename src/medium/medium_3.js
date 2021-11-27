@@ -22,9 +22,9 @@ function checkPower(obj, hp, t) {
 }
 
 export function searchHighPower(car_data, minHorsepower, minTorque) {
-    var valid = car_data.filter(checkPower(car_data, minHorsepower, minTorque));
+    var valid = car_data.filter(checkPower);
     valid.sort(function(a, b) {
-        valid[b].horsepower - valid[a].horsepower;
+        return valid[b].horsepower - valid[a].horsepower;
     });
     return valid;
 }
@@ -40,14 +40,14 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  * sorted by highway_mpg in descending order
  *
  */
-function checkMpg(obj, highway, city) {
+function checkMpg(obj, city, highway) {
     return (obj.highway_mpg >= highway && obj.city_mpg >= city);
 }
 
 export function searchMpg(car_data, minCity, minHighway) {
     var valid = car_data.filter(checkMpg);
     valid.sort(function(a, b) {
-        valid[b].highway_mpg - valid[a].highway_mpg;        
+        return valid[b].highway_mpg - valid[a].highway_mpg;        
     });
     return valid;
 }
