@@ -17,7 +17,7 @@
 export const repeat = (fn, n, ...params) => {
     var results = [];
     for (var i = 0; i < n; i++) {
-        results.push(fn(params[i]));
+        results.push(fn(...params[i]));
     }
     return results;
 };
@@ -157,7 +157,10 @@ export const someEven = (arr, test) => {
  *       -->  { pass: [1, 5, 31], fail: [90] }
  */
 export const filter = (arr, test) => {
-    return {fail: arr.filter(!test), pass: arr.filter(test)};
+    function failtest(element) {
+        return !test(element);
+    }
+    return {fail: arr.filter(failtest), pass: arr.filter(test)};
 };
 
 
