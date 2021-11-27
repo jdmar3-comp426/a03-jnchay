@@ -24,7 +24,7 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
     }
     var valid = car_data.filter(checkPower);
     valid.sort(function(a, b) {
-        return valid[b].horsepower - valid[a].horsepower;
+        return b.horsepower - a.horsepower;
     });
     return valid;
 }
@@ -47,7 +47,7 @@ export function searchMpg(car_data, minCity, minHighway) {
     }
     var valid = car_data.filter(checkMpg);
     valid.sort(function(a, b) {
-        return valid[b].highway_mpg - valid[a].highway_mpg;        
+        return b.highway_mpg - a.highway_mpg;        
     });
     return valid;
 }
@@ -81,7 +81,7 @@ export function searchByYear(car_data, years) {
     }
     var valid = car_data.filter(checkYear);
     valid.sort(function(a, b) {
-        valid[b].year - valid[a].year;
+        return b.year - a.year;
     });
     return valid;
 }
