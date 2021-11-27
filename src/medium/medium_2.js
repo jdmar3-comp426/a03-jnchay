@@ -125,8 +125,7 @@ desc_makes.sort(function(a, b) {
 
 var _makerHybrids = [];
 desc_makes.forEach(function(make, index) {
-    _makerHybrids[index].make = make;
-    _makerHybrids[index].hybrids = [];
+    _makerHybrids[index] = {make: make, hybrids = []};
     hybrids.forEach(function(hybrid) {
         if (hybrid.make == make) {
             _makerHybrids[index].hybrids.push(hybrid.id);
