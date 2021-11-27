@@ -109,10 +109,10 @@ var makes = [];
 hybrids.forEach(function(hybrid) {
     makes.push(hybrid.make);
 })
+
+
+
 var dict = countArray(makes);
-
-
-
 var desc_makes = [];
 for (var make in dict) {
     desc_makes.push([make, dict[make]]);
@@ -124,12 +124,12 @@ desc_makes.sort(function(a, b) {
 
 
 var _makerHybrids = [];
-desc_makes.forEach(function(make) {
-    _makerHybrids.make = make;
-    _makerHybrids.hybrids = [];
+desc_makes.forEach(function(make, index) {
+    _makerHybrids[index].make = make;
+    _makerHybrids[index].hybrids = [];
     hybrids.forEach(function(hybrid) {
         if (hybrid.make == make) {
-            _makerHybrids.hybrids.push(hybrid.id);
+            _makerHybrids[index].hybrids.push(hybrid.id);
         }
     })
 })
