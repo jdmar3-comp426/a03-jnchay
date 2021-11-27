@@ -20,11 +20,13 @@ see under the methods section
  *
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
-var totalavgMpg = 0;
+var totalcityMpg = 0;
+var totalhighwayMpg = 0;
 var caryears = [];
 var numhybrid = 0;
 mpg_data.forEach(function(data) {
-    totalavgMpg += (data.city_mpg + data.highway_mpg)/2
+    totalcityMpg += data.city_mpg ;
+    totalhighwayMpg += data.highway_mpg;
     caryears.push(data.year);
     if (data.hybrid) {
         numhybrid += 1;
@@ -32,7 +34,7 @@ mpg_data.forEach(function(data) {
 })
 
 export const allCarStats = {
-    avgMpg: totalavgMpg/mpg_data.length,
+    avgMpg: {city: totalcityMpg/mpg_data.length, highway: totalhighwayMpg/mpg_data.length},
     allYearStats: getStatistics(caryears),
     ratioHybrids: numhybrid/mpg_data.length,
 };
