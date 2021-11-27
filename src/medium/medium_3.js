@@ -22,7 +22,7 @@ function checkPower(obj, hp, t) {
 }
 
 export function searchHighPower(car_data, minHorsepower, minTorque) {
-    var valid = car_data.filter(checkPower);
+    var valid = car_data.filter(checkPower(car_data, minHorsepower, minTorque));
     valid.sort(function(a, b) {
         valid[b].horsepower - valid[a].horsepower;
     });
