@@ -62,7 +62,17 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @returns {[]} array of cars
  */
 export function searchName(car_data, searchTerm) {
-
+    function starts(obj, searchTerm) {
+        return obj.id.toLowerCase().startsWith(searchTerm.toLowerCase());
+    }
+    function contains(obj, searchTerm) {
+        if (!obj.id.toLowerCase().startsWith(searchTerm.toLowerCase())) {
+            return obj.id.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+    }
+    var results = car_data.filter(starts);
+    results.push(car_data.filter(contains));
+    return results;
 }
 
 
