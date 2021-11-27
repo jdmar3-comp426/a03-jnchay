@@ -140,7 +140,7 @@ function getHybrids(hybrids, hybrid) {
             hybrids[i].hybrids.push(hybrid.id);
         }
         else {
-            hybrids[makes_used.length - 1] = {make: hybrid.make, hybrids = []};
+            hybrids[makes_used.length - 1] = {make: hybrid.make, hybrids: []};
         }
     }
     return hybrids;
