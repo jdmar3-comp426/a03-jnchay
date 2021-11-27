@@ -17,11 +17,11 @@ queries.
  * sorted by horsepower in descending order.
  *
  */
-function checkPower(obj, hp, t) {
-    return (obj.horsepower >= hp && obj.torque >= t);
-}
 
 export function searchHighPower(car_data, minHorsepower, minTorque) {
+    function checkPower(obj) {
+        return (obj.horsepower >= minHorsepower && obj.torque >= minTorque);
+    }
     var valid = car_data.filter(checkPower);
     valid.sort(function(a, b) {
         return valid[b].horsepower - valid[a].horsepower;
@@ -40,11 +40,11 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  * sorted by highway_mpg in descending order
  *
  */
-function checkMpg(obj, city, highway) {
-    return (obj.highway_mpg >= highway && obj.city_mpg >= city);
-}
 
 export function searchMpg(car_data, minCity, minHighway) {
+    function checkMpg(obj) {
+        return (obj.highway_mpg >= minHighway && obj.city_mpg >= minCity);
+    }
     var valid = car_data.filter(checkMpg);
     valid.sort(function(a, b) {
         return valid[b].highway_mpg - valid[a].highway_mpg;        
@@ -74,11 +74,11 @@ export function searchName(car_data, searchTerm) {
  * @param {number[]} years - array of years to be included in the results e.g. [2010, 2012]
  * @returns {[]} an array of car objects
  */
-function checkYear(obj, years) {
-    return obj.year in years;
-}
 
 export function searchByYear(car_data, years) {
+    function checkYear(obj) {
+        return obj.year in years;
+    }
     var valid = car_data.filter(checkYear);
     valid.sort(function(a, b) {
         valid[b].year - valid[a].year;
