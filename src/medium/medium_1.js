@@ -60,14 +60,14 @@ export function getMedian(array) {
  */
 export function getStatistics(array) {
     var stats = {};
-    stats[length] = array.length;
-    stats[sum] = getSum(array);
-    stats[mean] = stats[sum]/stats[length];
-    stats[median] = getMedian(array);
-    stats[min] = Math.min(...array);
-    stats[max] = Math.max(...array);
-    stats[variance] = variance(array);
-    stats[standard_deviation] = Math.sqrt(stats[variance]);
+    stats.length = array.length;
+    stats.sum = getSum(array);
+    stats.mean = stats[sum]/stats[length];
+    stats.median = getMedian(array);
+    stats.min = Math.min(...array);
+    stats.max = Math.max(...array);
+    stats.variance = variance(array);
+    stats.standard_deviation = Math.sqrt(stats[variance]);
     return stats;
 }
 
