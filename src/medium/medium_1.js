@@ -69,7 +69,7 @@ export function getStatistics(array) {
     stats.min = Math.min(...array);
     stats.max = Math.max(...array);
     stats.variance = variance(array, getSum(array)/array.length);
-    stats.standard_deviation = Math.sqrt(stats[variance]);
+    stats.standard_deviation = Math.sqrt(variance(array, getSum(array)/array.length));
     return stats;
 }
 
