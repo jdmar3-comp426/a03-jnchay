@@ -64,7 +64,7 @@ export function getStatistics(array) {
     var stats = {};
     stats.length = array.length;
     stats.sum = getSum(array);
-    stats.mean = stats[sum]/stats[length];
+    stats.mean = getSum(array)/array.length;
     stats.median = getMedian(array);
     stats.min = Math.min(...array);
     stats.max = Math.max(...array);
