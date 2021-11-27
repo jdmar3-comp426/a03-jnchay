@@ -97,13 +97,13 @@ export const allCarStats = {
  *
  * }
  */
-/*
+
 function checkHybrid(obj) {
     return obj.hybrid;
 }
 var hybrids = mpg_data.filter(checkHybrid);
 
-
+/*
 
 var makes = [];
 hybrids.forEach(function(hybrid) {
@@ -133,13 +133,14 @@ desc_makes.forEach(function(make, index) {
     })
 })*/
 
-var makes_used = [];
-function getHybrids(hybrids, hybrid) {
+
+function getHybrids(hybrids, hybrid, makes_used) {
     for (var i = 0; i < makes_used.length; i++) {
         if (makes_used[i] == hybrid.make) {
             hybrids[i].hybrids.push(hybrid.id);
         }
         else {
+            makes_used.push(hybrid.make);
             hybrids[makes_used.length - 1] = {make: hybrid.make, hybrids: []};
         }
     }
