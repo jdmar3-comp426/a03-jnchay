@@ -97,7 +97,7 @@ export const allCarStats = {
  *
  * }
  */
-
+/*
 function checkHybrid(obj) {
     return obj.hybrid;
 }
@@ -131,13 +131,23 @@ desc_makes.forEach(function(make, index) {
             _makerHybrids[index].hybrids.push(hybrid.id);
         }
     })
-})
+})*/
 
-
-
+var makes_used = [];
+function getHybrids(hybrids, hybrid) {
+    for (var i = 0; i < makes_used.length; i++) {
+        if (makes_used[i] == hybrid.make) {
+            hybrids[i].hybrids.push(hybrid.id);
+        }
+        else {
+            hybrids[makes_used.length - 1] = {make: hybrid.make, hybrids = []};
+        }
+    }
+    return hybrids;
+}
 
 
 export const moreStats = {
-    makerHybrids: _makerHybrids,
+    makerHybrids: mpg_data.reduce(getHybrids),
     avgMpgByYearAndHybrid: undefined
 };
