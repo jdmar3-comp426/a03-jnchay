@@ -14,11 +14,11 @@
  * @return        Returns an array containing the return values obtained
  *                from calling the function
  */
-export const repeat = (fn, n, ...params) => {
+export const repeat = (fn, n, params) => {
     var results = [];
-    for (var i = 0; i < n; i++) {
-        results.push(fn(...params[i]));
-    }
+    params.forEach(function(param) {
+        results.push(fn(param));
+    })
     return results;
 };
 
@@ -160,7 +160,7 @@ export const filter = (arr, test) => {
     function failtest(element) {
         return !test(element);
     }
-    return {fail: arr.filter(failtest), pass: arr.filter(test)};
+    return {pass: arr.filter(test), fail: arr.filter(failtest)};
 };
 
 
