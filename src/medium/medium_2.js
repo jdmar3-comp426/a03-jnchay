@@ -1,5 +1,6 @@
 import mpg_data from "./data/mpg_data.js";
 import {getStatistics} from "./medium_1.js";
+import {countArray} from "../mild/mild_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -19,10 +20,23 @@ see under the methods section
  *
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
+var totalcityMpg = 0;
+var totalhighwayMpg = 0;
+var caryears = [];
+var numhybrid = 0;
+mpg_data.forEach(function(data) {
+    totalcityMpg += data.city_mpg ;
+    totalhighwayMpg += data.highway_mpg;
+    caryears.push(data.year);
+    if (data.hybrid) {
+        numhybrid += 1;
+    }
+})
+
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: {city: totalcityMpg/mpg_data.length, highway: totalhighwayMpg/mpg_data.length},
+    allYearStats: getStatistics(caryears),
+    ratioHybrids: numhybrid/mpg_data.length,
 };
 
 
@@ -83,7 +97,56 @@ export const allCarStats = {
  *
  * }
  */
+
+function checkHybrid(obj) {
+    return obj.hybrid;
+}
+var hybrids = mpg_data.filter(checkHybrid);
+
+/*
+
+var makes = [];
+hybrids.forEach(function(hybrid) {
+    makes.push(hybrid.make);
+})
+
+
+var dict = countArray(makes);
+var desc_makes = [];
+for (var make in dict) {
+    desc_makes.push([make, dict[make]]);
+}
+desc_makes.sort(function(a, b) {
+    return b[1] - a[1];
+});
+
+
+var _makerHybrids = [];
+desc_makes.forEach(function(make, index) {
+    _makerHybrids[index] = {make: make, hybrids: []};
+    hybrids.forEach(function(hybrid) {
+        if (hybrid.make == make) {
+            _makerHybrids[index].hybrids.push(hybrid.id);
+        }
+    })
+})*/
+
+
+function getHybrids(hybrids, hybrid, makes_used) {
+    for (var i = 0; i < makes_used.length; i++) {
+        if (makes_used[i] == hybrid.make) {
+            hybrids[i].hybrids.push(hybrid.id);
+        }
+        else {
+            makes_used.push(hybrid.make);
+            hybrids[makes_used.length - 1] = {make: hybrid.make, hybrids: []};
+        }
+    }
+    return hybrids;
+}
+
+
 export const moreStats = {
-    makerHybrids: undefined,
+    makerHybrids: mpg_data.reduce(getHybrids),
     avgMpgByYearAndHybrid: undefined
 };

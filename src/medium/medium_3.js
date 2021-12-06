@@ -17,8 +17,16 @@ queries.
  * sorted by horsepower in descending order.
  *
  */
-export function searchHighPower(car_data, minHorsepower, minTorque) {
 
+export function searchHighPower(car_data, minHorsepower, minTorque) {
+    function checkPower(obj) {
+        return (obj.horsepower >= minHorsepower && obj.torque >= minTorque);
+    }
+    var valid = car_data.filter(checkPower);
+    valid.sort(function(a, b) {
+        return b.horsepower - a.horsepower;
+    });
+    return valid;
 }
 
 
@@ -32,8 +40,16 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  * sorted by highway_mpg in descending order
  *
  */
-export function searchMpg(car_data, minCity, minHighway) {
 
+export function searchMpg(car_data, minCity, minHighway) {
+    function checkMpg(obj) {
+        return (obj.highway_mpg >= minHighway && obj.city_mpg >= minCity);
+    }
+    var valid = car_data.filter(checkMpg);
+    valid.sort(function(a, b) {
+        return b.highway_mpg - a.highway_mpg;        
+    });
+    return valid;
 }
 
 
@@ -46,7 +62,20 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @returns {[]} array of cars
  */
 export function searchName(car_data, searchTerm) {
-
+    function starts(obj) {
+        return obj.id.toLowerCase().startsWith(searchTerm.toLowerCase());
+    }
+    function contains(obj) {
+        if (!obj.id.toLowerCase().startsWith(searchTerm.toLowerCase())) {
+            return obj.id.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+    }
+    var results = car_data.filter(starts);
+    var results_2 = car_data.filter(contains);
+    results_2.forEach(function(result) {
+        results.push(result);
+    })
+    return results;
 }
 
 
@@ -58,6 +87,14 @@ export function searchName(car_data, searchTerm) {
  * @param {number[]} years - array of years to be included in the results e.g. [2010, 2012]
  * @returns {[]} an array of car objects
  */
-export function searchByYear(car_data, years) {
 
+export function searchByYear(car_data, years) {
+    function checkYear(obj) {
+        return obj.year in years;
+    }
+    var valid = car_data.filter(checkYear);
+    valid.sort(function(a, b) {
+        return b.year - a.year;
+    });
+    return valid;
 }
